@@ -29,27 +29,29 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: PrimaryColor,
         title: Text('Expense Tracker'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: PrimaryColor,
-              child: Center(
-                child: Text(
-                  'Chart!',
-                  style: TextStyle(
-                    color: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              child: Card(
+                color: PrimaryColor,
+                child: Center(
+                  child: Text(
+                    'Chart!',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
+                elevation: 5,
               ),
-              elevation: 5,
             ),
-          ),
-          UserTransactions()
-        ],
+            UserTransactions()
+          ],
+        ),
       ),
     );
   }

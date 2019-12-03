@@ -10,63 +10,68 @@ class TransactionList extends StatelessWidget {
   TransactionList(this.transactions);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: transactions.map((tx) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 0,
-            horizontal: 10,
-          ),
-          child: Card(
-            // shape: RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.circular(0),
-            // ),
-            color: Color(0xffe7eaef),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 15,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: PrimaryColor,
-                      width: 2,
-                    ),
-                  ),
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    '\$${tx.amount}',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: PrimaryColor),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      width: 500,
+      child: SingleChildScrollView(
+        child: Column(
+          children: transactions.map((tx) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 0,
+                horizontal: 10,
+              ),
+              child: Card(
+                // shape: RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.circular(0),
+                // ),
+                color: Color(0xffe7eaef),
+                child: Row(
                   children: <Widget>[
-                    Text(
-                      tx.title,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 15,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: PrimaryColor,
+                          width: 2,
+                        ),
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        '\$${tx.amount}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: PrimaryColor),
                       ),
                     ),
-                    Text(
-                      DateFormat.yMMMd().format(tx.date),
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          tx.title,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          DateFormat.yMMMd().format(tx.date),
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-            elevation: 5,
-          ),
-        );
-      }).toList(),
+                ),
+                elevation: 5,
+              ),
+            );
+          }).toList(),
+        ),
+      ),
     );
   }
 }
