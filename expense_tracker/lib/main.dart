@@ -1,9 +1,8 @@
-
+import './widgets/user_transactions.dart';
 import 'package:flutter/material.dart';
 
-
 void main() => runApp(MyApp());
-const PrimaryColor = const Color(0xff172b69);
+const PrimaryColor = const Color(0xff162229);
 
 class MyApp extends StatelessWidget {
   @override
@@ -25,7 +24,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffe8a93f),
+      backgroundColor: Color(0xff9ba8b8),
       appBar: AppBar(
         backgroundColor: PrimaryColor,
         title: Text('Expense Tracker'),
@@ -49,41 +48,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Card(
-              color: Color(0xfff1ebe0),
-              elevation: 5,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  TextField(
-                    decoration: InputDecoration(labelText: 'Title'),
-                    controller: titleController,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(labelText: 'Amount'),
-                    controller: amountController,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: FlatButton(
-                      color: PrimaryColor,
-                      child: Text(
-                        'Add Transaction',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      textColor: PrimaryColor,
-                      onPressed: () {
-                        print(titleController.text);
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          
+          UserTransactions()
         ],
       ),
     );
