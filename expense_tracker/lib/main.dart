@@ -1,4 +1,4 @@
-import 'package:expense_tracker/widgets/transaction_list.dart';
+import './widgets/chart.dart';
 
 import './widgets/new_transactions.dart';
 
@@ -31,19 +31,28 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      amount: 69.35,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Black Friday Shopping',
-      amount: 86.56,
-      date: DateTime.now(),
-    )
+    // Transaction(
+    //   id: 't1',
+    //   title: 'New Shoes',
+    //   amount: 69.35,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Black Friday Shopping',
+    //   amount: 86.56,
+    //   date: DateTime.now(),
+    // )
   ];
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _addNewTransaction(String title, double amount) {
     final newTx = Transaction(
@@ -91,21 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: PrimaryColor,
-                child: Center(
-                  child: Text(
-                    'Chart!',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
           ],
         ),
