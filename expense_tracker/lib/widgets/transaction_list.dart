@@ -6,12 +6,13 @@ const PrimaryColor = const Color(0xff162229);
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final Function deleteTx;
 
-  TransactionList(this.transactions);
+  TransactionList(this.transactions, this.deleteTx);
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 500,
       child: ListView.builder(
         itemBuilder: (ctx, index) {
           return Padding(
@@ -40,6 +41,11 @@ class TransactionList extends StatelessWidget {
                 ),
                 subtitle:
                     Text(DateFormat.yMMMd().format(transactions[index].date)),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete),
+                  color: Theme.of(context).errorColor,
+                  onPressed: () => deleteTx(transactions[index].id),
+                ),
               ),
             ),
           );

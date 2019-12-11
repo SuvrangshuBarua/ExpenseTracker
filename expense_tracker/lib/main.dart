@@ -8,6 +8,7 @@ import './models/transaction.dart';
 
 void main() => runApp(MyApp());
 const PrimaryColor = const Color(0xff162229);
+const AccentColor = const Color(0xff47646a);
 
 class MyApp extends StatelessWidget {
   @override
@@ -17,6 +18,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: PrimaryColor,
+        accentColor: AccentColor,
+        errorColor: Colors.red,
         fontFamily: 'Quicksand',
       ),
       home: MyHomePage(),
@@ -54,16 +57,22 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(String title, double amount, DateTime chosenDate) {
     final newTx = Transaction(
       title: title,
       amount: amount,
-      date: DateTime.now(),
+      date: chosenDate,
       id: DateTime.now().toString(),
     );
 
     setState(() {
       _userTransactions.add(newTx);
+    });
+  }
+
+  void _deleteTransactions(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) => tx.id == id);
     });
   }
 
@@ -84,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff9ba8b8),
+      backgroundColor: Color(0xffe7eaef),
       appBar: AppBar(
         backgroundColor: PrimaryColor,
         title: Text('Expense Tracker'),
@@ -101,13 +110,12 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, _deleteTransactions),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: PrimaryColor,
         child: Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
       ),
